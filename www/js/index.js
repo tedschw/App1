@@ -38,13 +38,14 @@ var app = {
           try {
              $(".lat-view").html(pos.coords.latitude);
              $(".long-view").html(pos.coords.longitude);
+             app.receivedEvent("deviceready");
+             var map = new GoogleMap();
+             map.initialize();
           } catch (err){
-          alert(err.message);}
+             alert(err.message);
+          }
        }
        navigator.geolocation.getCurrentPosition(disp);
-       app.receivedEvent("deviceready");
-       var map = new GoogleMap();
-       map.initialize();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
