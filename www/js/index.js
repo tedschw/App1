@@ -34,12 +34,16 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
        function disp(pos) {
-//           $('.lat-view').html(pos.coords.latitude);
-//           $('.long-view').html(pos.coords.longitude);
-        alert(pos.coords.latitude);
-        alert(pos.coords.longitude);
+          try {
+             $(".lat-view").html(pos.coords.latitude);
+             $(".long-view").html(pos.coords.longitude);
+          } catch (err){
+          alert(err.message);}
        }
        navigator.geolocation.getCurrentPosition(disp);
+       app.receivedEvent("deviceready");
+       var map = new GoogleMap();
+       map.initialize();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
